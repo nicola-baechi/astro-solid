@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        cursive: ['Press Start 2P', ...defaultTheme.fontFamily.sans],
+        sans: ['Oswald', ...defaultTheme.fontFamily.sans],
       },
     },
   },

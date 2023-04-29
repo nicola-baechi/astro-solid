@@ -1,6 +1,23 @@
-export default function SearchBar() {
-  const search = (key) => {
-    console.log('test');
+export default function Search() {
+  return (
+    <div
+      style={{
+        'background-image': `url('/images/jinx.jpg')`,
+        'background-position': 'top',
+        'background-repeat': 'no-repeat',
+        'background-blend-mode': 'overlay',
+        'background-size': '100vw',
+      }}
+      class='flex justify-center items-center h-1/4 sm:h-1/2'
+    >
+      <SearchBar />
+    </div>
+  );
+}
+
+const SearchBar = () => {
+  const search = () => {
+    fetch()
   };
 
   return (
@@ -23,7 +40,7 @@ export default function SearchBar() {
       </svg>
       <div class='ml-3 rounded-lg border-neutral-950 h-10 border-l-2'></div>
       <input
-        onKeyDown={(key) => key.code == 'Enter' && search(key)}
+        onKeyDown={(key) => key.code == 'Enter' && search()}
         type='text'
         autofocus
         class='pl-2 h-10 w-80 font-semibold bg-transparent outline-none placeholder:text-black'
@@ -31,4 +48,4 @@ export default function SearchBar() {
       />
     </div>
   );
-}
+};
