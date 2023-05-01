@@ -1,7 +1,24 @@
+import { useSummoner } from 'api/summoner';
+import useDebounce from 'hooks/useDebounce';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { getPlayer } from '../../api/getPlayer';
 
 export const Search = () => {
+  const [name, setName] = useState('');
+  const router = useRouter();
+
+  const debounced = useDebounce(name, 200);
+
+  const { data, isLoading, error } = useSummoner(debounced);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const search = () => {
+    router.push(`/profile/euw/${name}`);
+  };
+
   return (
     <div
       style={{
@@ -12,26 +29,14 @@ export const Search = () => {
       }}
       className='flex justify-center items-center h-1/2'
     >
-      <SearchBar />
+      {isLoading && <p>loading</p>}
+      {error && <p>error</p>}
+      <SearchBar handleChange={handleChange} search={search} />
     </div>
   );
 };
 
-const SearchBar = () => {
-  const [name, setName] = useState('');
-
-  const handleChange = (event) => {
-    setName(event.target.value);
-
-    console.log('value is:', event.target.value);
-  };
-
-  const search = async () => {
-    console.log(name);
-    const player = await getPlayer(name);
-    console.log(`player is ${player.summonerLevel}`);
-  };
-
+const SearchBar = ({ handleChange, search }) => {
   return (
     <div className='flex h-16 w-80 z-10 bg-[#C89B3C] items-center p-2 rounded-lg'>
       <svg
@@ -59,7 +64,6 @@ const SearchBar = () => {
       <div className='ml-3 rounded-lg border-black h-10 border-l-2'></div>
       <input
         onInput={(event) => handleChange(event)}
-        value={name}
         onKeyDown={(key) => key.code == 'Enter' && search()}
         type='text'
         autoFocus
@@ -69,3 +73,5 @@ const SearchBar = () => {
     </div>
   );
 };
+
+const navigate = () => {};

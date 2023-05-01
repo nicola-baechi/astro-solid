@@ -1,4 +1,4 @@
-export type Player = {
+export type Summoner = {
     id: string,
     accountId: string,
     puuid: string,
