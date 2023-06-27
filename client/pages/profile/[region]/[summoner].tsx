@@ -15,8 +15,3 @@ const Summoner = () => {
 };
 
 export default Summoner;
-
-export const getServerSideProps = async (ctx) => {
-
-  const { summoner } = ctx.params;
-}
