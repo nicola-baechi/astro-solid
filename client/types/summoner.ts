@@ -5,5 +5,7 @@ export type Summoner = {
     name: string,
     profileIconId: number,
     revisionDate: number,
-    summonerLevel: number
+    summonerLevel: number,
+    error: number,
+    message: string
 }

@@ -1,20 +1,22 @@
 import { useRouter } from 'next/router';
-import { useSummoner } from 'api/summoner';
 
 const Summoner = () => {
   const router = useRouter();
-  const { summoner } = router.query;
-  const { isLoading, isSuccess, error, data } = useSummoner(summoner as string);
+
+  const { query } = router;
+
+  console.log(query);
 
   return (
     <>
-      {isLoading && <div>LOADING</div>}
-      {isSuccess && <div>{JSON.stringify(data)}</div>}
-
-      {error && <div>error</div>}
-      <div className='h-screen bg-[#010A13] flex flex-col'></div>
+      <div className='h-screen bg-[#010A13] flex flex-col'>{query.data}</div>
     </>
   );
 };
 
 export default Summoner;
+
+export const getServerSideProps = async (ctx) => {
+
+  const { summoner } = ctx.params;
+}
