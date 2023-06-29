@@ -4,7 +4,6 @@ const { LolApi } = require('twisted');
 const { Regions, Queues } = require('twisted/dist/constants');
 const app = express();
 app.use(cors());
-const port = 8080;
 
 const api = new LolApi();
 
@@ -52,6 +51,8 @@ const getGrandmasterCutoff = async (request, response) => {
 app.route('/player/:username').get(getPlayer);
 app.route('/grandmaster').get(getGrandmasterCutoff);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
