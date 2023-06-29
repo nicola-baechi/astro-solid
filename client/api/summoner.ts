@@ -9,7 +9,7 @@ export const getSummoner = async (username: string): Promise<Summoner> => {
     return response.data;
 }
 
-export const useSummoner = (username: string, route?: string) => {
+export const useSummonerWithRoute = (username: string, route?: string) => {
     const router = useRouter();
 
     const { isLoading, isFetching, isSuccess, refetch, isError, error, data } = useQuery({
@@ -23,6 +23,20 @@ export const useSummoner = (username: string, route?: string) => {
             pathname: route as string,
             query: data
         }),
+
+    })
+    return { isLoading, isFetching, isSuccess, refetch, isError, summoner: data, error: error as AxiosError }
+}
+
+export const useSummoner = (username: string) => {
+
+    const { isLoading, isFetching, isSuccess, refetch, isError, error, data } = useQuery({
+        queryKey: ['search', username],
+        queryFn: ({ queryKey }) => getSummoner(queryKey[1]),
+        staleTime: 10 * (60 * 1000),
+        retry: false,
+        enabled: false,
+        refetchOnWindowFocus: false,
 
     })
     return { isLoading, isFetching, isSuccess, refetch, isError, summoner: data, error: error as AxiosError }

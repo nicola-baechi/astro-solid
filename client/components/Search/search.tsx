@@ -1,14 +1,12 @@
-import { useSummoner } from 'api/summoner';
+import { useSummonerWithRoute } from 'api/summoner';
 import { useState, useRef, useEffect } from 'react';
 import { AxiosError } from 'axios';
 
 export const Search = () => {
   const [name, setName] = useState('');
 
-  const { isLoading, isFetching, refetch, isError, error } = useSummoner(
-    name,
-    `/profile/euw/${name}`
-  );
+  const { isLoading, isFetching, refetch, isError, error } =
+    useSummonerWithRoute(name, `/profile/euw/${name}`);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
