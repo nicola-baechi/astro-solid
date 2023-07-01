@@ -9,6 +9,6 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ['ddragon.leagueoflegends.com'],
+    domains: ['ddragon.leagueoflegends.com', 'cdn.mobalytics.gg'],
   },
 };

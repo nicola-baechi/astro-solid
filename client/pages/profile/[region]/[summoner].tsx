@@ -18,16 +18,21 @@ const Summoner = () => {
   return (
     <>
       <div className='h-screen bg-[#010A13] flex flex-col items-center'>
-        <h1 className=' text-5xl '>{summoner?.name}</h1>
-        <div>
+        <div className='flex m-10 gap-2'>
           <Image
             src={`http://ddragon.leagueoflegends.com/cdn/13.13.1/img/profileicon/${summoner?.profileIconId}.png`}
-            width={200}
-            height={200}
-            className='rounded-full'
+            width={80}
+            height={80}
             alt='profileIconId'
           />
+          <h3 className='font-bold text-white  uppercase'>{summoner?.name}</h3>
         </div>
+        <Image
+            src={`https://cdn.mobalytics.gg/assets/lol/images/rank-icon/helm/challenger_1.png`}
+            width={80}
+            height={80}
+            alt='profileIconId'
+          />
       </div>
     </>
   );

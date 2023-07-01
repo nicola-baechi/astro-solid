@@ -12,11 +12,27 @@ const getPlayer = async (request, response) => {
   try {
     const summoner = (await api.Summoner.getByName(username, Regions.EU_WEST))
       .response;
-    response.status(200).json(summoner);
+
+    const ranked = (
+      await api.League.bySummoner(summoner.id, Regions.EU_WEST)
+    ).response
+      .filter((queue) => queue.queueType == 'RANKED_SOLO_5x5')
+      .at(0);
+
+    const merged = {
+      name: summoner.name,
+      profileIconId: summoner.profileIconId,
+      tier: ranked.tier,
+      rank: ranked.rank,
+      leaguePoints: ranked.leaguePoints,
+    };
+
+    response.status(200).json(merged);
   } catch (error) {
-    response
+    console.log(error);
+    /*response
       .status(error.status)
-      .json({ status_code: error.status, message: error.body.status.message });
+      .json({ status_code: error.status, message: error.body.status.message });*/
   }
 };
 
